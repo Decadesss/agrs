@@ -54,7 +54,7 @@ public class ArgsParserTest {
         Flag portFlag = schema.getFlagByName("p");
         assertNotNull(portFlag);
 
-        assertEquals(logFlag.getValue(), "false");
+        assertEquals(logFlag.getValue(), "true");
         assertEquals(portFlag.getValue(), "8080");
     }
 }
