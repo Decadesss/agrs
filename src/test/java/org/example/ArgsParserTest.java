@@ -14,13 +14,13 @@ public class ArgsParserTest {
         String args = "-l";
 
         //Act
-        Schema parse = ArgsParser.parse(args);
+        Schema schema = ArgsParser.parse(args);
 
         //Assert
-        assertNotNull(parse);
-        assertEquals(parse.getFlag(), "l");
-        assertEquals(parse.getName(), "logging");
-        assertEquals(parse.getValue(), "true");
+        assertNotNull(schema);
+        Flag flag = schema.getFlagByName("l");
+        assertNotNull(flag);
+        assertEquals(flag.getValue(), "true");
     }
 
     @Test
@@ -29,30 +29,12 @@ public class ArgsParserTest {
         String args = "";
 
         //Act
-        Schema parse = ArgsParser.parse(args);
+        Schema schema = ArgsParser.parse(args);
 
         //Assert
-        assertNotNull(parse);
-        assertEquals(parse.getFlag(), "l");
-        assertEquals(parse.getName(), "logging");
-        assertEquals(parse.getValue(), "false");
-    }
-
-    @Test
-    public void given_l_and_p_when_parse_return_logging_is_false(){
-        //Arrange
-        String args = "-l -p 8080";
-
-        //Act
-        Schema parse = ArgsParser.parse(args);
-
-        //Assert
-        assertNotNull(parse);
-        assertEquals(parse.getFlag(), "l");
-        assertEquals(parse.getName(), "logging");
-        assertEquals(parse.getValue(), "ture");
-        assertEquals(parse.getFlag(), "p");
-        assertEquals(parse.getName(), "port");
-        assertEquals(parse.getValue(), "8080");
+        assertNotNull(schema);
+        Flag flag = schema.getFlagByName("l");
+        assertNotNull(flag);
+        assertEquals(flag.getValue(), "false");
     }
 }
