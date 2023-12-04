@@ -1,10 +1,18 @@
 package org.example;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ArgsParser {
     public static Schema parse(String args){
+        List<Flag> flagList = new ArrayList<>();
+        Flag flag;
         if (args.equals("-l")){
-            return new Schema("l", "logging", "true", "false");
+            flag = new Flag("l", "logging", "true", "false");
+        }else {
+            flag = new Flag("l", "logging", "false", "false");
         }
-        return new Schema("l", "logging", "false", "false");
+        flagList.add(flag);
+        return new Schema(flagList);
     }
 }
