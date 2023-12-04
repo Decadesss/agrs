@@ -4,7 +4,7 @@ package org.example;
 import java.util.List;
 
 public class Schema {
-    private List<Flag> flags;
+    private final List<Flag> flags;
 
     public Schema(List<Flag> flags) {
         this.flags = flags;
@@ -12,7 +12,7 @@ public class Schema {
 
     public Flag getFlagByName(String targetName){
         for (Flag flag : flags) {
-            String flagName = flag.getName();
+            String flagName = flag.getFlag();
             if (flagName.equals(targetName)){
                 return flag;
             }

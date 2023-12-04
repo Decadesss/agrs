@@ -1,11 +1,7 @@
 package org.example;
 
-import sun.dc.pr.PRError;
-
-import java.nio.file.Paths;
-
 public class Flag {
-    private String name;
+    private String flag;
     private String describe;
     private String value;
     private String defaultValue;
@@ -14,27 +10,20 @@ public class Flag {
     public Flag() {
     }
 
-    public Flag(String name, String describe, String value, String defaultValue) {
-        this.name = name;
-        this.describe = describe;
-        this.value = value;
-        this.defaultValue = defaultValue;
-    }
-
     /**
      * 获取
-     * @return name
+     * @return flag
      */
-    public String getName() {
-        return name;
+    public String getFlag() {
+        return flag;
     }
 
     /**
      * 设置
-     * @param name
+     * @param flag
      */
-    public void setName(String name) {
-        this.name = name;
+    public void setFlag(String flag) {
+        this.flag = flag;
     }
 
     /**
@@ -86,6 +75,6 @@ public class Flag {
     }
 
     public String toString() {
-        return "Flag{name = " + name + ", describe = " + describe + ", value = " + value + ", defaultValue = " + defaultValue + "}";
+        return "Flag{flag = " + flag + ", describe = " + describe + ", value = " + value + ", defaultValue = " + defaultValue + "}";
     }
 }
