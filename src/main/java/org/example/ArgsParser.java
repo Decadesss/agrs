@@ -8,8 +8,19 @@ public class ArgsParser {
     public static Schema parse(String args) {
         List<String> argsList = splitArgs(args);
         List<Flag> flagList = parseArgsListToFlagList(argsList);
+        setDefaultArg(flagList);
         return new Schema(flagList);
     }
+
+    private static void setDefaultArg(List<Flag> flagList) {
+        for (Flag flag : flagList) {
+            if (flag.getFlag().equals("l")) {
+                return;
+            }
+        }
+        flagList.add(new Flag("l", "logging", "false"));
+    }
+
 
     private static List<Flag> parseArgsListToFlagList(List<String> argsList) {
         List<Flag> flagList = new ArrayList<>();
@@ -26,19 +37,23 @@ public class ArgsParser {
         String[] splitArg = arg.split(" ");
         ArgInfoEnum matchedEnum = ArgInfoEnum.match(splitArg[0]);
         if (matchedEnum != null) {
-            Flag flag = new Flag();
-            flag.setFlag(matchedEnum.getFlag());
-            flag.setDescribe(matchedEnum.name());
-
-            //-l 没有参数，特殊处理
-            if (matchedEnum.getFlag().equals("l")){
-                flag.setValue("true");
-            }else {
-                flag.setValue(splitArg[1]);
-            }
-            return flag;
+            return createFlagFromArgInfo(splitArg, matchedEnum);
         }
         return null;
+    }
+
+    private static Flag createFlagFromArgInfo(String[] splitArg, ArgInfoEnum matchedEnum) {
+        Flag flag = new Flag();
+        flag.setFlag(matchedEnum.getFlag());
+        flag.setDescribe(matchedEnum.name());
+
+        //-l 没有参数，特殊处理
+        if (matchedEnum.getFlag().equals("l")) {
+            flag.setValue("true");
+        } else {
+            flag.setValue(splitArg[1]);
+        }
+        return flag;
     }
 
     private static List<String> splitArgs(String args) {

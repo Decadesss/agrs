@@ -4,10 +4,14 @@ public class Flag {
     private String flag;
     private String describe;
     private String value;
-    private String defaultValue;
-
 
     public Flag() {
+    }
+
+    public Flag(String flag, String describe, String value) {
+        this.flag = flag;
+        this.describe = describe;
+        this.value = value;
     }
 
     /**
@@ -58,23 +62,7 @@ public class Flag {
         this.value = value;
     }
 
-    /**
-     * 获取
-     * @return defaultValue
-     */
-    public String getDefaultValue() {
-        return defaultValue;
-    }
-
-    /**
-     * 设置
-     * @param defaultValue
-     */
-    public void setDefaultValue(String defaultValue) {
-        this.defaultValue = defaultValue;
-    }
-
     public String toString() {
-        return "Flag{flag = " + flag + ", describe = " + describe + ", value = " + value + ", defaultValue = " + defaultValue + "}";
+        return "Flag{flag = " + flag + ", describe = " + describe + ", value = " + value + "}";
     }
 }
