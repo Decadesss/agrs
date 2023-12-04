@@ -5,6 +5,6 @@ public class ArgsParser {
         if (args.equals("-l")){
             return new Schema("l", "logging", "true", "false");
         }
-        return null;
+        return new Schema("l", "logging", "false", "false");
     }
 }
