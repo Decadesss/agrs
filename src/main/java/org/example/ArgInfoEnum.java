@@ -8,7 +8,11 @@ public enum ArgInfoEnum {
     /**
      * 端口
      */
-    port("p");
+    port("p"),
+    /**
+     * 目录
+     */
+    directory("d");
 
     private final String flag;
 
