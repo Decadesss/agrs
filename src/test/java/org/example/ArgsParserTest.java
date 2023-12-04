@@ -39,9 +39,9 @@ public class ArgsParserTest {
     }
 
     @Test
-    public void given_p_when_parse_return_port_and_logging(){
+    public void given_p_and_l_when_parse_return_port_and_logging(){
         //Arrange
-        String args = "-p 8080";
+        String args = "-l -p 8080";
 
         //Act
         Schema schema = ArgsParser.parse(args);
