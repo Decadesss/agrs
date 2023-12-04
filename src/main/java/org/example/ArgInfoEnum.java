@@ -4,20 +4,22 @@ public enum ArgInfoEnum {
     /**
      * 日志开关
      */
-    logging("l"),
+    logging("l", "false"),
     /**
      * 端口
      */
-    port("p"),
+    port("p", "666"),
     /**
      * 目录
      */
-    directory("d");
+    directory("d", "/usr/default");
 
     private final String flag;
+    private final String defaultValue;
 
-    ArgInfoEnum(String flag) {
+    ArgInfoEnum(String flag, String defaultValue) {
         this.flag = flag;
+        this.defaultValue = defaultValue;
     }
 
     public String getFlag() {
