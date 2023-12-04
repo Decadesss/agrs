@@ -4,31 +4,56 @@
 
 * given：-l
 * when：parse("-l")
-* then：return flag = logging value = true;
+* then：
+
+| flag1   |
+|---------|
+| logging |
+| true    |
 
 ---
 
 * given：empty_args
 * when：parse("")
-* then：return flag = logging value = false;
+* then：
+
+| flag1   |
+|---------|
+| logging |
+| false   |
 
 ---
 
 * given：-l -p 8080
 * when：parse("-l -p 8080")
-* then：return flag1 = logging value = true;flag2 = port value = 8080
+* then：
+
+| flag1   | flag2 |
+|---------|-------|
+| logging | port  |
+| true    | 8080  |
 
 ---
 
-* given：
-* when：
+* given：-l -p 8080 -d /usr/logs
+* when：parse("-l -p 8080 -d /usr/logs")
 * then：
+
+| flag1   | flag2 | flag3     |
+|---------|-------|-----------|
+| logging | port  | directory |
+| true    | 8080  | /usr/logs |
 
 ---
 
-* given：
-* when：
+* given：-p -d
+* when：parse("-p -d")
 * then：
+
+| flag1   | flag2 | flag3        |
+|---------|-------|--------------|
+| logging | port  | directory    |
+| false   | 8080  | /usr/default |
 
 ---
 
