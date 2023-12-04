@@ -3,7 +3,7 @@ package org.example;
 import java.util.logging.StreamHandler;
 
 public class Schema {
-    String tag;
+    String flag;
     String name;
     String value;
     String defaultValue;
@@ -12,8 +12,8 @@ public class Schema {
     public Schema() {
     }
 
-    public Schema(String tag, String name, String value, String defaultValue) {
-        this.tag = tag;
+    public Schema(String flag, String name, String value, String defaultValue) {
+        this.flag = flag;
         this.name = name;
         this.value = value;
         this.defaultValue = defaultValue;
@@ -21,18 +21,17 @@ public class Schema {
 
     /**
      * 获取
-     * @return tag
+     * @return flag
      */
-    public String getTag() {
-        return tag;
+    public String getFlag() {
+        return flag;
     }
 
     /**
      * 设置
-     * @param tag
      */
-    public void setTag(String tag) {
-        this.tag = tag;
+    public void setFlag(String flag) {
+        this.flag = flag;
     }
 
     /**
@@ -84,6 +83,6 @@ public class Schema {
     }
 
     public String toString() {
-        return "Schema{tag = " + tag + ", name = " + name + ", value = " + value + ", defaultValue = " + defaultValue + "}";
+        return "Schema{flag = " + flag + ", name = " + name + ", value = " + value + ", defaultValue = " + defaultValue + "}";
     }
 }

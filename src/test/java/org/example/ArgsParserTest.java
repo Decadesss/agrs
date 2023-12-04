@@ -1,16 +1,25 @@
 package org.example;
 
+
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 public class ArgsParserTest {
 
     @Test
-    public void testAdd() {
-        //Arrange：初始化测试对象或者准备测试数据
+    public void Given_l_when_parse_return_logging_is_ture(){
+        //Arrange
+        String args = "-l";
 
-        //Act：调用被测方法
+        //Act
+        Schema parse = ArgsParser.parse(args);
 
-        //Assert：断言
-
+        //Assert
+        assertNotNull(parse);
+        assertEquals(parse.getFlag(), "l");
+        assertEquals(parse.getName(), "logging");
+        assertEquals(parse.getValue(), "true");
     }
 }
