@@ -37,4 +37,24 @@ public class ArgsParserTest {
         assertNotNull(flag);
         assertEquals(flag.getValue(), "false");
     }
+
+    @Test
+    public void given_p_when_parse_return_port_and_logging(){
+        //Arrange
+        String args = "-p 8080";
+
+        //Act
+        Schema schema = ArgsParser.parse(args);
+
+        //Assert
+        assertNotNull(schema);
+
+        Flag logFlag = schema.getFlagByName("l");
+        assertNotNull(logFlag);
+        Flag portFlag = schema.getFlagByName("p");
+        assertNotNull(portFlag);
+
+        assertEquals(logFlag.getValue(), "false");
+        assertEquals(portFlag.getValue(), "8080");
+    }
 }
