@@ -8,15 +8,15 @@
 
 ---
 
-* given：
-* when：
-* then：
+* given：empty_args
+* when：parse("")
+* then：return flag = logging value = false;
 
 ---
 
-* given：
-* when：
-* then：
+* given：-l -p 8080
+* when：parse("-l -p 8080")
+* then：return flag1 = logging value = true;flag2 = port value = 8080
 
 ---
 
