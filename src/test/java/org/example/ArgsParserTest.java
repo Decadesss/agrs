@@ -18,7 +18,7 @@ public class ArgsParserTest {
 
         //Assert
         assertNotNull(argsParseResult);
-        Flag flag = argsParseResult.getFlagByName("l");
+        Flag<?> flag = argsParseResult.getFlagByName("l");
         assertNotNull(flag);
         assertEquals(flag.getValue(), true);
     }
@@ -33,9 +33,9 @@ public class ArgsParserTest {
 
         //Assert
         assertNotNull(argsParseResult);
-        Flag flag = argsParseResult.getFlagByName("l");
+        Flag<?> flag = argsParseResult.getFlagByName("l");
         assertNotNull(flag);
-        assertEquals(flag.getValue(), "false");
+        assertEquals(flag.getValue(), false);
     }
 
     @Test
@@ -49,9 +49,9 @@ public class ArgsParserTest {
         //Assert
         assertNotNull(argsParseResult);
 
-        Flag logFlag = argsParseResult.getFlagByName("l");
+        Flag<?> logFlag = argsParseResult.getFlagByName("l");
         assertNotNull(logFlag);
-        Flag portFlag = argsParseResult.getFlagByName("p");
+        Flag<?> portFlag = argsParseResult.getFlagByName("p");
         assertNotNull(portFlag);
 
         assertEquals(logFlag.getValue(), "true");
@@ -69,11 +69,11 @@ public class ArgsParserTest {
         //Assert
         assertNotNull(argsParseResult);
 
-        Flag logFlag = argsParseResult.getFlagByName("l");
+        Flag<?> logFlag = argsParseResult.getFlagByName("l");
         assertNotNull(logFlag);
-        Flag portFlag = argsParseResult.getFlagByName("p");
+        Flag<?> portFlag = argsParseResult.getFlagByName("p");
         assertNotNull(portFlag);
-        Flag directoryFlag = argsParseResult.getFlagByName("d");
+        Flag<?> directoryFlag = argsParseResult.getFlagByName("d");
         assertNotNull(directoryFlag);
 
         assertEquals(logFlag.getValue(), "true");
@@ -92,11 +92,11 @@ public class ArgsParserTest {
         //Assert
         assertNotNull(argsParseResult);
 
-        Flag logFlag = argsParseResult.getFlagByName("l");
+        Flag<?> logFlag = argsParseResult.getFlagByName("l");
         assertNotNull(logFlag);
-        Flag portFlag = argsParseResult.getFlagByName("p");
+        Flag<?> portFlag = argsParseResult.getFlagByName("p");
         assertNotNull(portFlag);
-        Flag directoryFlag = argsParseResult.getFlagByName("d");
+        Flag<?> directoryFlag = argsParseResult.getFlagByName("d");
         assertNotNull(directoryFlag);
 
         assertEquals(logFlag.getValue(), "false");

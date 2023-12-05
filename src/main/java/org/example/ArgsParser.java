@@ -7,25 +7,25 @@ import java.util.List;
 public class ArgsParser {
     public static ArgsParseResult parse(String args) {
         List<String> argsList = splitArgs(args);
-        List<Flag> flagList = parseArgsListToFlagList(argsList);
+        List<Flag<?>> flagList = parseArgsListToFlagList(argsList);
         setDefaultArg(flagList);
         return new ArgsParseResult(flagList);
     }
 
-    private static void setDefaultArg(List<Flag> flagList) {
-        for (Flag flag : flagList) {
+    private static void setDefaultArg(List<Flag<?>> flagList) {
+        for (Flag<?> flag : flagList) {
             if (flag.getFlag().equals("l")) {
                 return;
             }
         }
-        flagList.add(new Flag("l", "logging", false, Boolean.class));
+        flagList.add(new Flag<>("l", "logging", false, Boolean.class));
     }
 
 
-    private static List<Flag> parseArgsListToFlagList(List<String> argsList) {
-        List<Flag> flagList = new ArrayList<>();
+    private static List<Flag<?>> parseArgsListToFlagList(List<String> argsList) {
+        List<Flag<?>> flagList = new ArrayList<>();
         for (String arg : argsList) {
-            Flag flag = parseArgToFlag(arg);
+            Flag<?> flag = parseArgToFlag(arg);
             if (flag != null) {
                 flagList.add(flag);
             }
@@ -33,7 +33,7 @@ public class ArgsParser {
         return flagList;
     }
 
-    private static Flag parseArgToFlag(String arg) {
+    private static Flag<?> parseArgToFlag(String arg) {
         String[] splitArg = arg.split(" ");
         SchemaEnum matchedEnum = SchemaEnum.match(splitArg[0]);
         if (matchedEnum != null) {
@@ -42,8 +42,8 @@ public class ArgsParser {
         return null;
     }
 
-    private static Flag createFlagFromArgInfo(String[] splitArg, SchemaEnum matchedEnum) {
-        Flag flag = new Flag(matchedEnum.getFlag(), matchedEnum.name(), matchedEnum.getType());
+    private static Flag<?> createFlagFromArgInfo(String[] splitArg, SchemaEnum matchedEnum) {
+        Flag flag = new Flag<>(matchedEnum.getFlag(), matchedEnum.name(), matchedEnum.getType());
 
         //-l 没有参数，特殊处理
         if (matchedEnum.getFlag().equals("l")) {

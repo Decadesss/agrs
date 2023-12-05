@@ -36,7 +36,7 @@ public class Flag<T> {
 
     /**
      * 设置
-     * @param flag
+     * @param flag flag
      */
     public void setFlag(String flag) {
         this.flag = flag;
@@ -52,7 +52,7 @@ public class Flag<T> {
 
     /**
      * 设置
-     * @param describe
+     * @param describe describe
      */
     public void setDescribe(String describe) {
         this.describe = describe;
@@ -68,7 +68,7 @@ public class Flag<T> {
 
     /**
      * 设置
-     * @param value
+     * @param value value
      */
     public void setValue(T value) {
         if (this.type == null){
