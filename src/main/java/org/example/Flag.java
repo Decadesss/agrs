@@ -1,16 +1,28 @@
 package org.example;
 
-public class Flag {
+public class Flag<T> {
     private String flag;
     private String describe;
-    private String value;
+    private T value;
+    private Class<T> type;
 
     public Flag() {
     }
 
-    public Flag(String flag, String describe, String value) {
+    public Flag(String flag, String describe, Class<T> type) {
         this.flag = flag;
         this.describe = describe;
+        this.type = type;
+    }
+
+    public Flag(String flag, String describe, T value, Class<T> type) {
+        if (!type.isInstance(type)){
+            throw new IllegalArgumentException("Value must match type" + type.getSimpleName());
+        }
+
+        this.flag = flag;
+        this.describe = describe;
+        this.type = type;
         this.value = value;
     }
 
@@ -50,7 +62,7 @@ public class Flag {
      * 获取
      * @return value
      */
-    public String getValue() {
+    public T getValue() {
         return value;
     }
 
@@ -58,8 +70,24 @@ public class Flag {
      * 设置
      * @param value
      */
-    public void setValue(String value) {
+    public void setValue(T value) {
+        if (this.type == null){
+            throw new IllegalArgumentException("Must set type before set value");
+        }
+
+        if (!type.isInstance(value)){
+            throw new IllegalArgumentException("Value must match type: " + type.getSimpleName());
+        }
+
         this.value = value;
+    }
+
+    public Class<T> getType() {
+        return type;
+    }
+
+    public void setType(Class<T> type) {
+        this.type = type;
     }
 
     public String toString() {

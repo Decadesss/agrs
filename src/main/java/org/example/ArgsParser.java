@@ -18,7 +18,7 @@ public class ArgsParser {
                 return;
             }
         }
-        flagList.add(new Flag("l", "logging", "false"));
+        flagList.add(new Flag("l", "logging", false, Boolean.class));
     }
 
 
@@ -43,13 +43,11 @@ public class ArgsParser {
     }
 
     private static Flag createFlagFromArgInfo(String[] splitArg, SchemaEnum matchedEnum) {
-        Flag flag = new Flag();
-        flag.setFlag(matchedEnum.getFlag());
-        flag.setDescribe(matchedEnum.name());
+        Flag flag = new Flag(matchedEnum.getFlag(), matchedEnum.name(), matchedEnum.getType());
 
         //-l 没有参数，特殊处理
         if (matchedEnum.getFlag().equals("l")) {
-            flag.setValue("true");
+            flag.setValue(true);
         } else {
             flag.setValue(splitArg.length > 1 ? splitArg[1] : matchedEnum.getDefaultValue());
         }
