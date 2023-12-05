@@ -79,3 +79,35 @@
 | Boolean |
 
 ---
+* given：-l -p 8080
+* when：parse("-l -p 8080")
+* then：
+
+| flag1   | flag2   |
+|---------|---------|
+| logging | port    |
+| true    | 8080    |
+| Boolean | Integer |
+
+---
+
+* given：-l -p 8080 -d /usr/logs
+* when：parse("-l -p 8080 -d /usr/logs")
+* then：
+
+| flag1   | flag2   | flag3     |
+|---------|---------|-----------|
+| logging | port    | directory |
+| true    | 8080    | /usr/logs |
+| Boolean | Integer | String    |
+
+---
+* given：empty
+* when：parse("")
+* then：
+
+| flag1   | flag2   | flag3     |
+|---------|---------|-----------|
+| logging | port    | directory |
+| false   | 0       | ""        |
+| Boolean | Integer | String    |
