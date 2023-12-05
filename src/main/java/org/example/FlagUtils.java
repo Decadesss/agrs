@@ -7,7 +7,7 @@ public class FlagUtils {
     public static List<Flag<?>> initFlagList() {
         List<Flag<?>> flagList = new ArrayList<>();
         for (SchemaEnum value : SchemaEnum.values()) {
-            Flag<?> flag = new Flag<>(value.getFlag(), value.getFlag(), value.getType());
+            Flag<?> flag = new Flag<>(value.getFlagName(), value.getFlagName(), value.getType());
             flagList.add(flag);
         }
         return flagList;
@@ -15,19 +15,20 @@ public class FlagUtils {
 
     public static void supplyDefaultValues(List<Flag<?>> flagList) {
         for (Flag<?> flag : flagList) {
-            if (flag.getFlag().equals("l")) {
-                return;
+            if (flag.getValue() != null){
+                continue;
             }
+            SchemaEnum matchedEnum = SchemaEnum.matchByFlagName(flag.getFlagName());
+            flag.setValue(matchedEnum.getDefaultValue());
         }
-        flagList.add(new Flag<>("l", "logging", false, Boolean.class));
     }
 
     public static Flag<?> matchByFlagName(String flagName, List<Flag<?>> flagList) {
         for (Flag<?> flag : flagList) {
-            if (flag.getFlag().equals(flagName)){
+            if (flag.getFlagName().equals(flagName)){
                 return flag;
             }
         }
-        return null;
+        throw new IllegalArgumentException("Not contain " + flagName + " in initial flag list.");
     }
 }

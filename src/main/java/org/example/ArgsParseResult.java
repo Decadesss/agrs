@@ -12,7 +12,7 @@ public class ArgsParseResult {
 
     public Flag<?> getFlagByName(String targetName){
         for (Flag<?> flag : flags) {
-            String flagName = flag.getFlag();
+            String flagName = flag.getFlagName();
             if (flagName.equals(targetName)){
                 return flag;
             }

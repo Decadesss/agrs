@@ -8,32 +8,26 @@ public class ArgsParser {
     public static ArgsParseResult parse(String args) {
         List<Flag<?>> flagList = FlagUtils.initFlagList();
         List<String> argsList = splitArgs(args);
-        parseArgsListToFlagList(argsList, flagList);
+        parseArgsListToUpdateFlagList(argsList, flagList);
         FlagUtils.supplyDefaultValues(flagList);
         return new ArgsParseResult(flagList);
     }
 
-    private static void parseArgsListToFlagList(List<String> argsList, List<Flag<?>> flagList) {
+    private static void parseArgsListToUpdateFlagList(List<String> argsList, List<Flag<?>> flagList) {
         for (String arg : argsList) {
-            Flag<?> flag = parseArgToFlag(arg);
-            if (flag != null) {
-                flagList.add(flag);
-            }
+            parseArgToUpdateFlag(arg, flagList);
         }
     }
 
-    private static Flag<?> parseArgToFlag(String arg, List<Flag<?>> flagList) {
+    private static void parseArgToUpdateFlag(String arg, List<Flag<?>> flagList) {
         String[] splitArg = arg.split(" ");
         String flagName = splitArg[0];
         SchemaEnum matchedEnum = SchemaEnum.matchByFlagName(flagName);
         Flag<?> matchedFlag = FlagUtils.matchByFlagName(flagName, flagList);
-        if (matchedEnum != null) {
-            return updateFlagFromSchema(splitArg, matchedEnum, matchedFlag);
-        }
-        return null;
+        updateFlagFromSchema(splitArg, matchedEnum, matchedFlag);
     }
 
-    private static Flag<?> updateFlagFromSchema(String[] splitArg, SchemaEnum matchedEnum, Flag<?> matchedFlag) {
+    private static void updateFlagFromSchema(String[] splitArg, SchemaEnum matchedEnum, Flag<?> matchedFlag) {
         //-l 没有参数，特殊处理
         if (matchedEnum.getFlagName().equals("l")) {
             matchedFlag.setValue(true);
@@ -44,7 +38,6 @@ public class ArgsParser {
                 matchedFlag.setValue(matchedEnum.getDefaultValue());
             }
         }
-        return matchedFlag;
     }
 
     private static List<String> splitArgs(String args) {

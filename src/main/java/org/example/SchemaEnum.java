@@ -1,10 +1,13 @@
 package org.example;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public enum SchemaEnum {
     /**
      * 日志开关
      */
-    logging("l", true, Boolean.class),
+    logging("l", false, Boolean.class),
     /**
      * 端口
      */
@@ -41,11 +44,14 @@ public enum SchemaEnum {
             return null;
         }
 
+        List<String> validFlagName = new ArrayList<>();
         for (SchemaEnum enums : SchemaEnum.values()) {
             if (enums.getFlagName().equals(flagName)) {
                 return enums;
             }
+            validFlagName.add(enums.getFlagName());
         }
-        return null;
+        throw new IllegalArgumentException("illegal flag.Valid flags are "
+                + String.join(",", validFlagName));
     }
 }

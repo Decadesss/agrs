@@ -1,7 +1,7 @@
 package org.example;
 
 public class Flag<T> {
-    private String flag;
+    private String flagName;
     private String describe;
     private T value;
     private Class<T> type;
@@ -9,18 +9,18 @@ public class Flag<T> {
     public Flag() {
     }
 
-    public Flag(String flag, String describe, Class<T> type) {
-        this.flag = flag;
+    public Flag(String flagName, String describe, Class<T> type) {
+        this.flagName = flagName;
         this.describe = describe;
         this.type = type;
     }
 
-    public Flag(String flag, String describe, T value, Class<T> type) {
+    public Flag(String flagName, String describe, T value, Class<T> type) {
         if (!type.isInstance(value)) {
             throw new IllegalArgumentException("Value must match type:" + type.getSimpleName());
         }
 
-        this.flag = flag;
+        this.flagName = flagName;
         this.describe = describe;
         this.type = type;
         this.value = value;
@@ -31,17 +31,17 @@ public class Flag<T> {
      *
      * @return flag
      */
-    public String getFlag() {
-        return flag;
+    public String getFlagName() {
+        return flagName;
     }
 
     /**
      * 设置
      *
-     * @param flag flag
+     * @param flagName flag
      */
-    public void setFlag(String flag) {
-        this.flag = flag;
+    public void setFlagName(String flagName) {
+        this.flagName = flagName;
     }
 
     /**
@@ -114,6 +114,6 @@ public class Flag<T> {
     }
 
     public String toString() {
-        return "Flag{flag = " + flag + ", describe = " + describe + ", value = " + value + "}";
+        return "Flag{flag = " + flagName + ", describe = " + describe + ", value = " + value + "}";
     }
 }
