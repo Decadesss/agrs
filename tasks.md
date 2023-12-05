@@ -113,6 +113,6 @@
 | Boolean | Integer | String    |
 
 ---
-* given：-l -l
-* when：parse("-l -l")
+* given：invalid args
+* when：parse those invalid args
 * then：throw exception
