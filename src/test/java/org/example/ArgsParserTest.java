@@ -113,7 +113,8 @@ public class ArgsParserTest {
 
     @ParameterizedTest
     @ValueSource(strings = {
-            "-l -l"
+            "-l -l",
+            "-l 9090"
     })
     public void given_invalid_args_when_parse_return_throw(String args){
         assertThrows(IllegalArgumentException.class, ()->ArgsParser.parse(args));
