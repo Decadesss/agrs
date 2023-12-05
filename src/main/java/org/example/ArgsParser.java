@@ -43,15 +43,23 @@ public class ArgsParser {
     }
 
     private static Flag<?> createFlagFromArgInfo(String[] splitArg, SchemaEnum matchedEnum) {
-        Flag flag = new Flag<>(matchedEnum.getFlag(), matchedEnum.name(), matchedEnum.getType());
+        Flag<?> flag = new Flag<>(matchedEnum.getFlag(), matchedEnum.name(), matchedEnum.getType());
 
         //-l 没有参数，特殊处理
         if (matchedEnum.getFlag().equals("l")) {
             flag.setValue(true);
         } else {
-            flag.setValue(splitArg.length > 1 ? splitArg[1] : matchedEnum.getDefaultValue());
+            if (splitArg.length > 1){
+                flag.setValueByParseString(splitArg[1], matchedEnum.getType());
+            } else {
+                flag.setValue(matchedEnum.getDefaultValue());
+            }
         }
         return flag;
+    }
+
+    private static Object stringConvertToRequiredType(String s, Class<?> type) {
+        return null;
     }
 
     private static List<String> splitArgs(String args) {
