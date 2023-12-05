@@ -111,3 +111,8 @@
 | logging | port    | directory |
 | false   | 0       | ""        |
 | Boolean | Integer | String    |
+
+---
+* given：-l -l
+* when：parse("-l -l")
+* then：throw exception
