@@ -2,6 +2,8 @@ package org.example;
 
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -109,12 +111,11 @@ public class ArgsParserTest {
         assertEquals(directoryFlag.getValue(), "");
     }
 
-    @Test
-    public void given_double_l_when_parse_return_throw(){
-        //Arrange
-        String args = "-l 9090 -l";
-
-        //Act
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "-l -l"
+    })
+    public void given_invalid_args_when_parse_return_throw(String args){
         assertThrows(IllegalArgumentException.class, ()->ArgsParser.parse(args));
     }
 }
