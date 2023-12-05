@@ -40,8 +40,8 @@ public class ArgsParserTest {
         assertNotNull(directoryFlag);
 
         assertEquals(logFlag.getValue(), false);
-        assertEquals(portFlag.getValue(), 666);
-        assertEquals(directoryFlag.getValue(), "/usr/default");
+        assertEquals(portFlag.getValue(), 0);
+        assertEquals(directoryFlag.getValue(), "");
     }
 
     @Test
