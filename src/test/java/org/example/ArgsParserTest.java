@@ -114,9 +114,18 @@ public class ArgsParserTest {
     @ParameterizedTest
     @ValueSource(strings = {
             "-l -l",
-            "-l 9090"
+            "-l 9090",
+            "-p 9000,9000",
+            "-p /usr",
+            "-p 65536",
+            "-a",
+            "-p8080-d/usr/logs",
+            "-l p 8080"
     })
     public void given_invalid_args_when_parse_return_throw(String args){
-        assertThrows(IllegalArgumentException.class, ()->ArgsParser.parse(args));
+        IllegalArgumentException illegalArgumentException =
+                assertThrows(IllegalArgumentException.class, () -> ArgsParser.parse(args));
+
+        System.out.println(illegalArgumentException.getMessage());
     }
 }
