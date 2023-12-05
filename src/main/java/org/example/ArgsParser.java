@@ -27,7 +27,13 @@ public class ArgsParser {
         updateFlagFromSchema(splitArg, matchedEnum, matchedFlag);
     }
 
-    private static void updateFlagFromSchema(String[] splitArg, SchemaEnum matchedEnum, Flag<?> matchedFlag) {
+    private static void updateFlagFromSchema(String[] splitArg,
+                                             SchemaEnum matchedEnum, Flag<?> matchedFlag) {
+        if (matchedFlag.getValue() != null){
+            throw new IllegalArgumentException(
+                    "flag [" + matchedFlag.getFlagName() + "] appears multiple time");
+        }
+
         //-l 没有参数，特殊处理
         if (matchedEnum.getFlagName().equals("l")) {
             matchedFlag.setValue(true);
