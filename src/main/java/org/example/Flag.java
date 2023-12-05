@@ -94,14 +94,22 @@ public class Flag<T> {
      * @param value value
      */
     public void setValueByParseString(String value, Class<?> type) {
-        if (type.equals(Integer.class)) {
-            this.setValue(Integer.parseInt(value));
-        } else if (type.equals(Boolean.class)) {
-            this.setValue(Boolean.parseBoolean(value));
-        } else if(type.equals(String.class)){
-            this.setValue(value);
-        }else {
-            throw new IllegalArgumentException("Not supported parameter type.");
+        try {
+            if (type.equals(Integer.class)) {
+                int port = Integer.parseInt(value);
+                if (port > 65535){
+                    throw new IllegalArgumentException("port should between 0 and 65535");
+                }
+                this.setValue(port);
+            } else if (type.equals(Boolean.class)) {
+                this.setValue(Boolean.parseBoolean(value));
+            } else if(type.equals(String.class)){
+                this.setValue(value);
+            }else {
+                throw new IllegalArgumentException("Not supported parameter type.");
+            }
+        }catch (Exception e){
+            throw new IllegalArgumentException("value [" + value + "] parse to " + type.getSimpleName() + " failed");
         }
     }
 
