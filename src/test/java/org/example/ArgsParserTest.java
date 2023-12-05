@@ -109,4 +109,15 @@ public class ArgsParserTest {
         assertEquals(portFlag.getValue(), 0);
         assertEquals(directoryFlag.getValue(), "");
     }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void given_double_l_when_parse_return_throw(){
+        //Arrange
+        String args = "-l -l";
+
+        //Act
+        ArgsParseResult argsParseResult = ArgsParser.parse(args);
+
+        //Assert
+    }
 }
