@@ -5,11 +5,11 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ArgsParser {
-    public static Schema parse(String args) {
+    public static ArgsParseResult parse(String args) {
         List<String> argsList = splitArgs(args);
         List<Flag> flagList = parseArgsListToFlagList(argsList);
         setDefaultArg(flagList);
-        return new Schema(flagList);
+        return new ArgsParseResult(flagList);
     }
 
     private static void setDefaultArg(List<Flag> flagList) {
@@ -35,14 +35,14 @@ public class ArgsParser {
 
     private static Flag parseArgToFlag(String arg) {
         String[] splitArg = arg.split(" ");
-        ArgInfoEnum matchedEnum = ArgInfoEnum.match(splitArg[0]);
+        SchemaEnum matchedEnum = SchemaEnum.match(splitArg[0]);
         if (matchedEnum != null) {
             return createFlagFromArgInfo(splitArg, matchedEnum);
         }
         return null;
     }
 
-    private static Flag createFlagFromArgInfo(String[] splitArg, ArgInfoEnum matchedEnum) {
+    private static Flag createFlagFromArgInfo(String[] splitArg, SchemaEnum matchedEnum) {
         Flag flag = new Flag();
         flag.setFlag(matchedEnum.getFlag());
         flag.setDescribe(matchedEnum.name());

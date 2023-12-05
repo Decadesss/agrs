@@ -1,6 +1,6 @@
 package org.example;
 
-public enum ArgInfoEnum {
+public enum SchemaEnum {
     /**
      * 日志开关
      */
@@ -17,7 +17,7 @@ public enum ArgInfoEnum {
     private final String flag;
     private final String defaultValue;
 
-    ArgInfoEnum(String flag, String defaultValue) {
+    SchemaEnum(String flag, String defaultValue) {
         this.flag = flag;
         this.defaultValue = defaultValue;
     }
@@ -30,12 +30,12 @@ public enum ArgInfoEnum {
         return defaultValue;
     }
 
-    public static ArgInfoEnum match(String flag) {
+    public static SchemaEnum match(String flag) {
         if (flag == null || flag.isEmpty()){
             return null;
         }
 
-        for (ArgInfoEnum enums : ArgInfoEnum.values()) {
+        for (SchemaEnum enums : SchemaEnum.values()) {
             if (enums.getFlag().equals(flag)) {
                 return enums;
             }

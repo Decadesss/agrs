@@ -14,11 +14,11 @@ public class ArgsParserTest {
         String args = "-l";
 
         //Act
-        Schema schema = ArgsParser.parse(args);
+        ArgsParseResult argsParseResult = ArgsParser.parse(args);
 
         //Assert
-        assertNotNull(schema);
-        Flag flag = schema.getFlagByName("l");
+        assertNotNull(argsParseResult);
+        Flag flag = argsParseResult.getFlagByName("l");
         assertNotNull(flag);
         assertEquals(flag.getValue(), "true");
     }
@@ -29,11 +29,11 @@ public class ArgsParserTest {
         String args = "";
 
         //Act
-        Schema schema = ArgsParser.parse(args);
+        ArgsParseResult argsParseResult = ArgsParser.parse(args);
 
         //Assert
-        assertNotNull(schema);
-        Flag flag = schema.getFlagByName("l");
+        assertNotNull(argsParseResult);
+        Flag flag = argsParseResult.getFlagByName("l");
         assertNotNull(flag);
         assertEquals(flag.getValue(), "false");
     }
@@ -44,14 +44,14 @@ public class ArgsParserTest {
         String args = "-l -p 8080";
 
         //Act
-        Schema schema = ArgsParser.parse(args);
+        ArgsParseResult argsParseResult = ArgsParser.parse(args);
 
         //Assert
-        assertNotNull(schema);
+        assertNotNull(argsParseResult);
 
-        Flag logFlag = schema.getFlagByName("l");
+        Flag logFlag = argsParseResult.getFlagByName("l");
         assertNotNull(logFlag);
-        Flag portFlag = schema.getFlagByName("p");
+        Flag portFlag = argsParseResult.getFlagByName("p");
         assertNotNull(portFlag);
 
         assertEquals(logFlag.getValue(), "true");
@@ -64,16 +64,16 @@ public class ArgsParserTest {
         String args = "-l -p 8080 -d /usr/logs";
 
         //Act
-        Schema schema = ArgsParser.parse(args);
+        ArgsParseResult argsParseResult = ArgsParser.parse(args);
 
         //Assert
-        assertNotNull(schema);
+        assertNotNull(argsParseResult);
 
-        Flag logFlag = schema.getFlagByName("l");
+        Flag logFlag = argsParseResult.getFlagByName("l");
         assertNotNull(logFlag);
-        Flag portFlag = schema.getFlagByName("p");
+        Flag portFlag = argsParseResult.getFlagByName("p");
         assertNotNull(portFlag);
-        Flag directoryFlag = schema.getFlagByName("d");
+        Flag directoryFlag = argsParseResult.getFlagByName("d");
         assertNotNull(directoryFlag);
 
         assertEquals(logFlag.getValue(), "true");
@@ -87,16 +87,16 @@ public class ArgsParserTest {
         String args = "-p -d";
 
         //Act
-        Schema schema = ArgsParser.parse(args);
+        ArgsParseResult argsParseResult = ArgsParser.parse(args);
 
         //Assert
-        assertNotNull(schema);
+        assertNotNull(argsParseResult);
 
-        Flag logFlag = schema.getFlagByName("l");
+        Flag logFlag = argsParseResult.getFlagByName("l");
         assertNotNull(logFlag);
-        Flag portFlag = schema.getFlagByName("p");
+        Flag portFlag = argsParseResult.getFlagByName("p");
         assertNotNull(portFlag);
-        Flag directoryFlag = schema.getFlagByName("d");
+        Flag directoryFlag = argsParseResult.getFlagByName("d");
         assertNotNull(directoryFlag);
 
         assertEquals(logFlag.getValue(), "false");

@@ -3,10 +3,10 @@ package org.example;
 
 import java.util.List;
 
-public class Schema {
+public class ArgsParseResult {
     private final List<Flag> flags;
 
-    public Schema(List<Flag> flags) {
+    public ArgsParseResult(List<Flag> flags) {
         this.flags = flags;
     }
 
