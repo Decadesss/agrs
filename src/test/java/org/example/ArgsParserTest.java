@@ -54,8 +54,8 @@ public class ArgsParserTest {
         Flag<?> portFlag = argsParseResult.getFlagByName("p");
         assertNotNull(portFlag);
 
-        assertEquals(logFlag.getValue(), "true");
-        assertEquals(portFlag.getValue(), "8080");
+        assertEquals(logFlag.getValue(), true);
+        assertEquals(portFlag.getValue(), 8080);
     }
 
     @Test
@@ -76,8 +76,8 @@ public class ArgsParserTest {
         Flag<?> directoryFlag = argsParseResult.getFlagByName("d");
         assertNotNull(directoryFlag);
 
-        assertEquals(logFlag.getValue(), "true");
-        assertEquals(portFlag.getValue(), "8080");
+        assertEquals(logFlag.getValue(), true);
+        assertEquals(portFlag.getValue(), 8080);
         assertEquals(directoryFlag.getValue(), "/usr/logs");
     }
 
@@ -99,8 +99,8 @@ public class ArgsParserTest {
         Flag<?> directoryFlag = argsParseResult.getFlagByName("d");
         assertNotNull(directoryFlag);
 
-        assertEquals(logFlag.getValue(), "false");
-        assertEquals(portFlag.getValue(), "666");
+        assertEquals(logFlag.getValue(), false);
+        assertEquals(portFlag.getValue(), 666);
         assertEquals(directoryFlag.getValue(), "/usr/default");
     }
 }
