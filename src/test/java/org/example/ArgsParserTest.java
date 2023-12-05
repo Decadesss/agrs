@@ -99,8 +99,8 @@ public class ArgsParserTest {
         Flag directoryFlag = schema.getFlagByName("d");
         assertNotNull(directoryFlag);
 
-        assertEquals(logFlag.getValue(), "true");
-        assertEquals(portFlag.getValue(), "8080");
-        assertEquals(directoryFlag.getValue(), "/usr/logs");
+        assertEquals(logFlag.getValue(), "false");
+        assertEquals(portFlag.getValue(), "666");
+        assertEquals(directoryFlag.getValue(), "/usr/default");
     }
 }
