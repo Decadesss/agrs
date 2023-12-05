@@ -1,7 +1,5 @@
 package org.example;
 
-import javafx.beans.binding.ObjectExpression;
-
 public class Flag<T> {
     private String flag;
     private String describe;

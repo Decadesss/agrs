@@ -6,60 +6,45 @@ import java.util.List;
 
 public class ArgsParser {
     public static ArgsParseResult parse(String args) {
+        List<Flag<?>> flagList = FlagUtils.initFlagList();
         List<String> argsList = splitArgs(args);
-        List<Flag<?>> flagList = parseArgsListToFlagList(argsList);
-        setDefaultArg(flagList);
+        parseArgsListToFlagList(argsList, flagList);
+        FlagUtils.supplyDefaultValues(flagList);
         return new ArgsParseResult(flagList);
     }
 
-    private static void setDefaultArg(List<Flag<?>> flagList) {
-        for (Flag<?> flag : flagList) {
-            if (flag.getFlag().equals("l")) {
-                return;
-            }
-        }
-        flagList.add(new Flag<>("l", "logging", false, Boolean.class));
-    }
-
-
-    private static List<Flag<?>> parseArgsListToFlagList(List<String> argsList) {
-        List<Flag<?>> flagList = new ArrayList<>();
+    private static void parseArgsListToFlagList(List<String> argsList, List<Flag<?>> flagList) {
         for (String arg : argsList) {
             Flag<?> flag = parseArgToFlag(arg);
             if (flag != null) {
                 flagList.add(flag);
             }
         }
-        return flagList;
     }
 
-    private static Flag<?> parseArgToFlag(String arg) {
+    private static Flag<?> parseArgToFlag(String arg, List<Flag<?>> flagList) {
         String[] splitArg = arg.split(" ");
-        SchemaEnum matchedEnum = SchemaEnum.match(splitArg[0]);
+        String flagName = splitArg[0];
+        SchemaEnum matchedEnum = SchemaEnum.matchByFlagName(flagName);
+        Flag<?> matchedFlag = FlagUtils.matchByFlagName(flagName, flagList);
         if (matchedEnum != null) {
-            return createFlagFromArgInfo(splitArg, matchedEnum);
+            return updateFlagFromSchema(splitArg, matchedEnum, matchedFlag);
         }
         return null;
     }
 
-    private static Flag<?> createFlagFromArgInfo(String[] splitArg, SchemaEnum matchedEnum) {
-        Flag<?> flag = new Flag<>(matchedEnum.getFlag(), matchedEnum.name(), matchedEnum.getType());
-
+    private static Flag<?> updateFlagFromSchema(String[] splitArg, SchemaEnum matchedEnum, Flag<?> matchedFlag) {
         //-l 没有参数，特殊处理
-        if (matchedEnum.getFlag().equals("l")) {
-            flag.setValue(true);
+        if (matchedEnum.getFlagName().equals("l")) {
+            matchedFlag.setValue(true);
         } else {
             if (splitArg.length > 1){
-                flag.setValueByParseString(splitArg[1], matchedEnum.getType());
+                matchedFlag.setValueByParseString(splitArg[1], matchedEnum.getType());
             } else {
-                flag.setValue(matchedEnum.getDefaultValue());
+                matchedFlag.setValue(matchedEnum.getDefaultValue());
             }
         }
-        return flag;
-    }
-
-    private static Object stringConvertToRequiredType(String s, Class<?> type) {
-        return null;
+        return matchedFlag;
     }
 
     private static List<String> splitArgs(String args) {

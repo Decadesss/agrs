@@ -8,24 +8,24 @@ public enum SchemaEnum {
     /**
      * 端口
      */
-    port("p", 666, Integer.class),
+    port("p", 0, Integer.class),
     /**
      * 目录
      */
-    directory("d", "/usr/default", String.class);
+    directory("d", "", String.class);
 
-    private final String flag;
+    private final String flagName;
     private final Object defaultValue;
     private final Class<?> type;
 
-    SchemaEnum(String flag, Object defaultValue, Class<?> type) {
-        this.flag = flag;
+    SchemaEnum(String flagName, Object defaultValue, Class<?> type) {
+        this.flagName = flagName;
         this.defaultValue = defaultValue;
         this.type = type;
     }
 
-    public String getFlag() {
-        return flag;
+    public String getFlagName() {
+        return flagName;
     }
 
     public Object getDefaultValue() {
@@ -36,13 +36,13 @@ public enum SchemaEnum {
         return type;
     }
 
-    public static SchemaEnum match(String flag) {
-        if (flag == null || flag.isEmpty()){
+    public static SchemaEnum matchByFlagName(String flagName) {
+        if (flagName == null || flagName.isEmpty()){
             return null;
         }
 
         for (SchemaEnum enums : SchemaEnum.values()) {
-            if (enums.getFlag().equals(flag)) {
+            if (enums.getFlagName().equals(flagName)) {
                 return enums;
             }
         }
