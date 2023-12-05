@@ -35,22 +35,22 @@ public class ArgsParser {
 
     private static void updateFlagFromSchema(String[] splitArg,
                                              SchemaEnum matchedEnum, Flag<?> matchedFlag) {
-        if (matchedFlag.getValue() != null){
+        if (matchedFlag.getValue() != null) {
             throw new IllegalArgumentException(
                     "Flag [" + matchedFlag.getFlagName() + "] appears multiple time");
         }
 
         //-l 没有参数，特殊处理
         if (matchedEnum.getFlagName().equals("l")) {
-            if (splitArg.length >1){
+            if (splitArg.length > 1) {
                 throw new IllegalArgumentException("Flag [-l] should not have values");
             }
             matchedFlag.setValue(true);
         } else {
-            if (splitArg.length > 2){
+            if (splitArg.length > 2) {
                 throw new IllegalArgumentException("Too much values");
             }
-            if (splitArg.length > 1){
+            if (splitArg.length > 1) {
                 matchedFlag.setValueByParseString(splitArg[1], matchedEnum.getType());
             } else {
                 matchedFlag.setValue(matchedEnum.getDefaultValue());
