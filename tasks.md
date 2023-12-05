@@ -57,14 +57,25 @@
 
 ---
 
-* given：
-* when：
+* given：-l
+* when：parse("-l")
 * then：
 
+| flag1   |
+|---------|
+| logging |
+| true    |
+| Boolean |
 ---
 
-* given：
-* when：
+* given：empty
+* when：parse("")
 * then：
+
+| flag1   |
+|---------|
+| logging |
+| false   |
+| Boolean |
 
 ---
