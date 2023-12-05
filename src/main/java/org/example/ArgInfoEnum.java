@@ -26,6 +26,10 @@ public enum ArgInfoEnum {
         return flag;
     }
 
+    public String getDefaultValue() {
+        return defaultValue;
+    }
+
     public static ArgInfoEnum match(String flag) {
         if (flag == null || flag.isEmpty()){
             return null;

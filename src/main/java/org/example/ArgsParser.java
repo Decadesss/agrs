@@ -51,7 +51,7 @@ public class ArgsParser {
         if (matchedEnum.getFlag().equals("l")) {
             flag.setValue("true");
         } else {
-            flag.setValue(splitArg[1]);
+            flag.setValue(splitArg.length > 1 ? splitArg[1] : matchedEnum.getDefaultValue());
         }
         return flag;
     }
