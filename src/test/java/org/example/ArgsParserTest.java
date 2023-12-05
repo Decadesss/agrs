@@ -20,7 +20,7 @@ public class ArgsParserTest {
         assertNotNull(argsParseResult);
         Flag flag = argsParseResult.getFlagByName("l");
         assertNotNull(flag);
-        assertEquals(flag.getValue(), "true");
+        assertEquals(flag.getValue(), true);
     }
 
     @Test
