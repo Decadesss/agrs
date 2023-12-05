@@ -6,9 +6,13 @@ import java.util.List;
 
 public class ArgsParser {
     public static ArgsParseResult parse(String args) {
+        //初始化参数结构
         List<Flag<?>> flagList = FlagUtils.initFlagList();
+
         List<String> argsList = splitArgs(args);
+
         parseArgsListToUpdateFlagList(argsList, flagList);
+
         FlagUtils.supplyDefaultValues(flagList);
         return new ArgsParseResult(flagList);
     }
@@ -22,6 +26,7 @@ public class ArgsParser {
     private static void parseArgToUpdateFlag(String arg, List<Flag<?>> flagList) {
         String[] splitArg = arg.split(" ");
         String flagName = splitArg[0];
+
         SchemaEnum matchedEnum = SchemaEnum.matchByFlagName(flagName);
         Flag<?> matchedFlag = FlagUtils.matchByFlagName(flagName, flagList);
 
