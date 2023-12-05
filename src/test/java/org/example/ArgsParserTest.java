@@ -1,10 +1,9 @@
 package org.example;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ArgsParserTest {
 
@@ -110,14 +109,12 @@ public class ArgsParserTest {
         assertEquals(directoryFlag.getValue(), "");
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void given_double_l_when_parse_return_throw(){
         //Arrange
-        String args = "-l -l";
+        String args = "-l 9090 -l";
 
         //Act
-        ArgsParseResult argsParseResult = ArgsParser.parse(args);
-
-        //Assert
+        assertThrows(IllegalArgumentException.class, ()->ArgsParser.parse(args));
     }
 }
