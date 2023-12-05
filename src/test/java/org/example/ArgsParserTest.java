@@ -24,7 +24,7 @@ public class ArgsParserTest {
     }
 
     @Test
-    public void given_empty_when_parse_return_logging_is_false(){
+    public void given_empty_when_parse_return_all_default(){
         //Arrange
         String args = "";
 
@@ -32,10 +32,16 @@ public class ArgsParserTest {
         ArgsParseResult argsParseResult = ArgsParser.parse(args);
 
         //Assert
-        assertNotNull(argsParseResult);
-        Flag<?> flag = argsParseResult.getFlagByName("l");
-        assertNotNull(flag);
-        assertEquals(flag.getValue(), false);
+        Flag<?> logFlag = argsParseResult.getFlagByName("l");
+        assertNotNull(logFlag);
+        Flag<?> portFlag = argsParseResult.getFlagByName("p");
+        assertNotNull(portFlag);
+        Flag<?> directoryFlag = argsParseResult.getFlagByName("d");
+        assertNotNull(directoryFlag);
+
+        assertEquals(logFlag.getValue(), false);
+        assertEquals(portFlag.getValue(), 666);
+        assertEquals(directoryFlag.getValue(), "/usr/default");
     }
 
     @Test
